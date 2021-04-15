@@ -48,15 +48,20 @@ function generatePassword(){
     if (selectNum) {
         masterCharacters = masterCharacters.concat(num)
     }
+
+    //alerts users to choose at least one if none of the character types are selected
+    if (lowerSelection === false && upperSelection === false && specialSelection === false && numberSelection === false) {
+        alert("At least one character type must be selected")
+    }
 }
 // Write password to the #password input
 function writePassword() {
-
 
     var password = generatePassword();
     var passwordText = document.querySelector("#password");
     passwordText.value = password;
 }
+
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
