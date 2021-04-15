@@ -35,12 +35,19 @@ function generatePassword(){
    //selecting with true or false
    if (selectLowercase) {
         masterCharacters = masterCharacters.concat(lower)
-   }
+    }
 
    if (selectUppercase) {
-    masterCharacters = masterCharacters.concat(upper)
+        masterCharacters = masterCharacters.concat(upper)
     }
-    return masterCharacters
+    
+    if (selectSpecial) {
+        masterCharacters = masterCharacters.concat(special)
+    }
+
+    if (selectNum) {
+        masterCharacters = masterCharacters.concat(num)
+    }
 }
 // Write password to the #password input
 function writePassword() {
