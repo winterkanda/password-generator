@@ -53,13 +53,33 @@ function generatePassword(){
     if (lowerSelection === false && upperSelection === false && specialSelection === false && numberSelection === false) {
         alert("At least one character type must be selected")
     }
+
+    //generate random password
+    var characters = '';
+    characters += (lowerSelection ? lower : '');
+    characters += (upperSelection ? upper : '');
+    characters += (specialSelection ? special '');
+    characters += (numberSelection ? numbers '');
+
+    pwd = password(confirmLength, characters);
+
+    document.getElementById("password").innerHTML = pwd;
 }
+
 // Write password to the #password input
 function writePassword() {
 
     var password = generatePassword();
     var passwordText = document.querySelector("#password");
     passwordText.value = password;
+}
+
+function password (l, characters) {
+    var pwd= '';
+    for (var i = 0; i < l; ++i) {
+        pwd += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return pwd;
 }
 
 
