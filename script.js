@@ -5,10 +5,18 @@ var special = '!@#$^&%*()+=-[]{}|:<>?,.' .split("");
 var num = '1234567890' .split("");
 var masterCharacters = [];
 
+var pwd = '';
+
+var lowerSelection = false;
+var upperSelection = false;
+var specialSelection = false;
+var numberSelection = false;
+
 // Assignment code here
 var generateBtn = document.querySelector("#generate");
 
 function generatePassword(){
+    masterCharacters = []
     var userInput = parseInt(prompt ("Select the length of your password."))
   if (userInput < 8 || userInput > 128 || userInput === null || userInput === "") {
       alert("Invalid input . Please choose a valid length between 8 to 128 characters.")
@@ -41,29 +49,27 @@ function generatePassword(){
         masterCharacters = masterCharacters.concat(upper)
     }
     
-    if (selectSpecial) {
+    if (selectSymbols) {
         masterCharacters = masterCharacters.concat(special)
     }
 
-    if (selectNum) {
+    if (selectNumeric) {
         masterCharacters = masterCharacters.concat(num)
     }
 
+    console.log (masterCharacters)
+
     //alerts users to choose at least one if none of the character types are selected
-    if (lowerSelection === false && upperSelection === false && specialSelection === false && numberSelection === false) {
+    if (lowerSelection === false && upperSelection === false && selectSymbols === false && selectNumeric === false) {
         alert("At least one character type must be selected")
     }
 
     //generate random password
-    var characters = '';
-    characters += (lowerSelection ? lower : '');
-    characters += (upperSelection ? upper : '');
-    characters += (specialSelection ? special '');
-    characters += (numberSelection ? numbers '');
+    pwd = password(userInput, masterCharacters);
 
-    pwd = password(confirmLength, characters);
+    // document.getElementById("password").innerHTML = pwd;
 
-    document.getElementById("password").innerHTML = pwd;
+    return pwd;
 }
 
 // Write password to the #password input
@@ -72,16 +78,17 @@ function writePassword() {
     var password = generatePassword();
     var passwordText = document.querySelector("#password");
     passwordText.value = password;
+    console.log (password)
 }
+    console.log (pwd)
 
-function password (l, characters) {
+function password (l, masterCharacters) {
     var pwd= '';
     for (var i = 0; i < l; ++i) {
-        pwd += characters.charAt(Math.floor(Math.random() * characters.length));
+        pwd += masterCharacters[Math.floor(Math.random() * masterCharacters.length)];
     }
     return pwd;
 }
-
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
